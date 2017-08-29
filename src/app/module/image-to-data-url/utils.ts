@@ -10,26 +10,26 @@ export function createImage(url: string) {
 }
 
 export function resizeImage(origImage: HTMLImageElement, {
-    resizeMaxHeight,
-  resizeMaxWidth,
-  resizeQuality = 0.7,
-  resizeType = 'image/jpeg'
+    maxHeight,
+  maxWidth,
+  quality = 0.7,
+  type = 'image/jpeg'
 }: ResizeOptions = {}) {
 
-  if (!document) return null;
+  if (!document) throw new Error('Work only in browser, document not defined');
   const canvas = document.createElement('canvas');
 
   let height = origImage.height;
   let width = origImage.width;
 
-  if (width > resizeMaxWidth) {
-    height = Math.round(height * resizeMaxWidth / width);
-    width = resizeMaxWidth;
+  if (width > maxWidth) {
+    height = Math.round(height * maxWidth / width);
+    width = maxWidth;
   }
 
-  if (height > resizeMaxHeight) {
-    width = Math.round(width * resizeMaxHeight / height);
-    height = resizeMaxHeight;
+  if (height > maxHeight) {
+    width = Math.round(width * maxHeight / height);
+    height = maxHeight;
   }
 
   canvas.width = width;
@@ -40,5 +40,5 @@ export function resizeImage(origImage: HTMLImageElement, {
   ctx.drawImage(origImage, 0, 0, width, height);
 
   // get the data from canvas as 70% jpg (or specified type).
-  return canvas.toDataURL(resizeType, resizeQuality);
+  return canvas.toDataURL(type, quality);
 }

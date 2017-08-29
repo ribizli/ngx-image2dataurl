@@ -1,28 +1,112 @@
-# NgxImage2dataurl
+# ngx-image2dataurl
+An Angular component which resizes the selected input file image
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.3.2.
+# Install
 
-## Development server
+```
+npm install ngx-image2dataurl --save
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# Usage
 
-## Code scaffolding
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+import { AppComponent } from './app.component';
+import { ImageToDataUrlModule } from "./module/image-to-data-url";
 
-## Build
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    ImageToDataUrlModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+```typescript
+import { Component } from '@angular/core';
+import { Options, ImageResult } from "./module/image-to-data-url";
 
-## Running unit tests
+@Component({
+  selector: 'app-root',
+  template: `
+    <img [src]="src" *ngIf="src"><br>
+    <input type="file" [imageToDataUrl]="options"
+      (imageSelected)="selected($event)">
+  `
+})
+export class AppComponent {
+  src: string = null;
+  options: Options = {
+    resize: {
+      maxHeight: 128,
+      maxWidth: 128
+    },
+    allowedExtensions: ['JPG', 'PnG']
+  };
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+  selected(imageResult: ImageResult) {
+    if (imageResult.error) alert(imageResult.error);
+    this.src = imageResult.resized
+      && imageResult.resized.dataURL
+      || imageResult.dataURL;
+  }
+}
+```
+# API
+## selector: `input[type=file][imageToDataUrl]`
 
-## Running end-to-end tests
+## event: `(imageSelected)`
+event fired (async) when the file input changes and the image's `dataURL` is calculated and the image is resized.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+```typescript
+export interface ImageResult {
+  file: File;
+  url: string;
+  dataURL?: string;
+  error?: any;
+  resized?: {
+      dataURL: string;
+      type: string;
+  }
+}
+```
 
-## Further help
+If any error happens, the `error` field is set with an error message.
+(e.g. `'Extension Not Allowed'` or `'Image processing error'`)
+If the error happens during resizing, `file`, `url` and `dataURL` of the original image is still set.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## property: `[imageToDataUrl]` - options
+
+```typescript
+export interface ResizeOptions {
+  maxHeight?: number;
+  maxWidth?: number;
+  quality?: number;
+  type?: string;
+}
+
+export interface Options {
+  resize?: ResizeOptions;
+  allowedExtensions?: string[];
+}
+```
+ - `resize`: default `undefined`
+ - `resize.maxHeight`
+ - `resize.maxWidth`
+ - `resize.quality`: default: `0.7`
+ - `resize.type`: default: `image/jpeg`
+ - `allowedExtensions`: default: undefined
+
+Resize algorithm ensures, that the resized image can fit into the specified `resize.maxHeight x resize.maxWidth` size.
+
+Allowed extensions array (e.g. `['jpg', 'jpeg', 'png']`; case insensitive): if specified and an input file
+has different extension the `imageSelected` event is fired with the error field set to 'Extension Not Allowed'.
+`dataUrl` and `resize` not calculated at all.

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ResizeOptions, ImageResult } from "./module/image-to-data-url";
+import { Options, ImageResult } from "./module/image-to-data-url";
 
 @Component({
   selector: 'app-root',
@@ -8,14 +8,18 @@ import { ResizeOptions, ImageResult } from "./module/image-to-data-url";
 })
 export class AppComponent {
   src: string = null;
-  resizeOptions: ResizeOptions = {
-      resizeMaxHeight: 128,
-      resizeMaxWidth: 128
+  options: Options = {
+    resize: {
+      maxHeight: 128,
+      maxWidth: 128
+    },
+    allowedExtensions: ['JPG', 'PnG']
   };
 
   selected(imageResult: ImageResult) {
-      this.src = imageResult.resized
-          && imageResult.resized.dataURL
-          || imageResult.dataURL;
+    if (imageResult.error) alert(imageResult.error);
+    this.src = imageResult.resized
+      && imageResult.resized.dataURL
+      || imageResult.dataURL;
   }
 }

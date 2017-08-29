@@ -10,8 +10,13 @@ export interface ImageResult {
 }
 
 export interface ResizeOptions {
-  resizeMaxHeight?: number;
-  resizeMaxWidth?: number;
-  resizeQuality?: number;
-  resizeType?: string;
+  maxHeight?: number;
+  maxWidth?: number;
+  quality?: number;
+  type?: string;
+}
+
+export interface Options {
+  resize?: ResizeOptions;
+  allowedExtensions?: string[];
 }
