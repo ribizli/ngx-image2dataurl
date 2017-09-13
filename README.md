@@ -1,5 +1,7 @@
 # ngx-image2dataurl
-An Angular component which resizes the selected input file image
+An Angular component which resizes the selected input file image.
+
+[Demo](https://stackblitz.com/edit/angular-fbarcl)
 
 # Install
 
@@ -14,7 +16,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { ImageToDataUrlModule } from "./module/image-to-data-url";
+import { ImageToDataUrlModule } from "ngx-image2dataurl";
 
 @NgModule({
   declarations: [
@@ -32,7 +34,7 @@ export class AppModule { }
 
 ```typescript
 import { Component } from '@angular/core';
-import { Options, ImageResult } from "./module/image-to-data-url";
+import { Options, ImageResult } from "ngx-image2dataurl";
 
 @Component({
   selector: 'app-root',
