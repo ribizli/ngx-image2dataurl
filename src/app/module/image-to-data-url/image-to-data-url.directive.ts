@@ -14,8 +14,6 @@ export class ImageToDataUrlDirective implements OnChanges {
 
   @Input('imageToDataUrl') options: Options = {};
 
-  private _allowedExtensions: string[];
-
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.options) {
       this.options = {};
@@ -27,7 +25,7 @@ export class ImageToDataUrlDirective implements OnChanges {
   }
 
   @HostListener('change', ['$event'])
-  private readFiles(event) {
+  readFiles(event) {
     for (let file of event.target.files as File[]) {
       const result: ImageResult = {
         file: file,
