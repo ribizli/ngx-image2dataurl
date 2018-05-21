@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Options, ImageResult } from "./module/image-to-data-url";
+import { Options, ImageResult } from "ngx-image2dataurl";
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,7 @@ export class AppComponent {
   options: Options = {
     resize: {
       maxHeight: 128,
-      maxWidth: 128
+      maxWidth: 128,
     },
     allowedExtensions: ['JPG', 'PnG']
   };

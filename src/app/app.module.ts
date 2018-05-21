@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { ImageToDataUrlModule } from "./module/image-to-data-url";
+import { ImageToDataUrlModule } from 'ngx-image2dataurl';
 
 @NgModule({
   declarations: [
