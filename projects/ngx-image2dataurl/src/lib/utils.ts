@@ -1,16 +1,16 @@
 import { ResizeOptions } from './interfaces';
 
-export function createImage(url: string) {
+export function createImageFromDataUrl(dataURL: string) {
   return new Promise<HTMLImageElement>((res, rej) => {
     const image = new Image();
     image.onload = () => res(image);
     image.onerror = rej;
-    image.src = url;
+    image.src = dataURL;
   });
 }
 
 export function resizeImage(origImage: HTMLImageElement, {
-    maxHeight,
+  maxHeight,
   maxWidth,
   quality = 0.7,
   type = 'image/jpeg'
@@ -41,4 +41,20 @@ export function resizeImage(origImage: HTMLImageElement, {
 
   // get the data from canvas as 70% jpg (or specified type).
   return canvas.toDataURL(type, quality);
+}
+
+export function fileToDataURL(file: File): Promise<string> {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      resolve(reader.result);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+const typeRE = /:(.+\/.+;).*,/;
+export function getImageTypeFromDataUrl(dataURL: string): string {
+  let matches = dataURL.substr(0, 30).match(typeRE);
+  return matches && matches[1] || undefined;
 }

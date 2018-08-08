@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Options, ImageResult } from "ngx-image2dataurl";
+import { ImageResult, Options } from "ngx-image2dataurl";
 
 @Component({
   selector: 'app-root',

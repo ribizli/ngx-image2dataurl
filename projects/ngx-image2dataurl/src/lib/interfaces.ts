@@ -20,3 +20,7 @@ export interface Options {
   resize?: ResizeOptions;
   allowedExtensions?: string[];
 }
+
+export interface ImageFileProcessor {
+  process(dateURL: string): Promise<string>;
+}
