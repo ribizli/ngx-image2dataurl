@@ -40,11 +40,15 @@ export class ImageToDataUrlDirective implements OnChanges {
         && this.options.allowedExtensions.indexOf(ext) === -1) {
         result.error = new Error('Extension Not Allowed');
       } else {
-        result.dataURL = await fileToDataURL(file);
-        for (const processor of this.imageFileProcessors) {
-          result.dataURL = await processor.process(result.dataURL);
+        try {
+          result.dataURL = await fileToDataURL(file);
+          for (const processor of this.imageFileProcessors) {
+            result.dataURL = await processor.process(result.dataURL);
+          }
+          result.resized = await this.resize(result.dataURL, this.options.resize);
+        } catch (e) {
+          result.error = e;
         }
-        result.resized = await this.resize(result.dataURL, this.options.resize);
       }
       this.imageSelected.emit(result);
     }
@@ -52,8 +56,7 @@ export class ImageToDataUrlDirective implements OnChanges {
 
   private async resize(dataURL: string, options: ResizeOptions): Promise<{ dataURL: string, type: string }> {
     if (!options) return null;
-    const image = await createImageFromDataUrl(dataURL);
-    const resisedDataUrl = await resizeImage(image, options);
+    const resisedDataUrl = await resizeImage(dataURL, options);
     return {
       dataURL: resisedDataUrl,
       type: getImageTypeFromDataUrl(resisedDataUrl)
