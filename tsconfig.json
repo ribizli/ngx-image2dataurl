@@ -18,7 +18,7 @@
     ],
     "paths": {
       "ngx-image2dataurl": [
-        "dist/ngx-image2dataurl"
+        "projects/ngx-image2dataurl/src/public_api"
       ]
     }
   }
