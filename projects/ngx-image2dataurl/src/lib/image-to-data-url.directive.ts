@@ -14,7 +14,9 @@ export class ImageToDataUrlDirective implements OnChanges {
 
   @Input('imageToDataUrl') options: Options = {};
 
-  constructor(@Optional() @Inject(IMAGE_FILE_PROCESSOR) private imageFileProcessors: ImageFileProcessor[] = []) { }
+  constructor(@Optional() @Inject(IMAGE_FILE_PROCESSOR) private imageFileProcessors: ImageFileProcessor[]) {
+    this.imageFileProcessors = imageFileProcessors || [];
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.options) {
