@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "importHelpers": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -18,7 +19,7 @@
     ],
     "paths": {
       "ngx-image2dataurl": [
-        "projects/ngx-image2dataurl/src/public_api"
+        "dist/ngx-image2dataurl"
       ]
     }
   }

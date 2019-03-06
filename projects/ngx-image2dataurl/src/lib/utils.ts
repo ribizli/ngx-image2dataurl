@@ -49,7 +49,7 @@ export function fileToDataURL(file: File): Promise<string> {
   return new Promise((resolve) => {
     const reader = new FileReader();
     reader.onload = function (e) {
-      resolve(reader.result);
+      resolve(reader.result as string);
     };
     reader.readAsDataURL(file);
   });
