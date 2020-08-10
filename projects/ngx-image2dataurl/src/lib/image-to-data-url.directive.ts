@@ -1,6 +1,6 @@
 import { Directive, EventEmitter, HostListener, Inject, InjectionToken, Input, OnChanges, Optional, Output, SimpleChanges } from '@angular/core';
 import { ImageFileProcessor, ImageResult, Options, ResizeOptions } from './interfaces';
-import { createImageFromDataUrl, fileToDataURL, getImageTypeFromDataUrl, resizeImage } from './utils';
+import { fileToDataURL, getImageTypeFromDataUrl, resizeImage } from './utils';
 
 
 export const IMAGE_FILE_PROCESSOR = new InjectionToken<ImageFileProcessor>('ImageFileProcessor');

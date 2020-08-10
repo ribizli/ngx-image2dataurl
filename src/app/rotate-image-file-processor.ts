@@ -1,5 +1,7 @@
 import { createImageFromDataUrl, getImageTypeFromDataUrl, ImageFileProcessor } from "ngx-image2dataurl";
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class RotateImageFileProcessor implements ImageFileProcessor {
   async process(dataURL: string): Promise<string> {
     const canvas = document.createElement('canvas');
