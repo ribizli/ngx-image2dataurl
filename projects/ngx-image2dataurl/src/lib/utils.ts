@@ -39,6 +39,8 @@ export async function resizeImage(dataURL: string, {
 
   //draw image on canvas
   const ctx = canvas.getContext("2d");
+  ctx.fillStyle = 'white';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(image, 0, 0, width, height);
 
   // get the data from canvas as 70% jpg (or specified type).
