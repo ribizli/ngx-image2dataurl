@@ -1,6 +1,15 @@
 {
   "name": "ngx-image2dataurl-app",
   "version": "0.0.0",
+  "license": "MIT",
+  "description": "An Angular component which reads the `dataURL` and optionally resizes the selected input file image.",
+  "author": {
+    "name": "Mark Magyarodi",
+    "url": "https://github.com/ribizli"
+  },
+  "repository": {
+    "url": "https://github.com/ribizli/ngx-image2dataurl"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
