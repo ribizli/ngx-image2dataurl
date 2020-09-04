@@ -4,8 +4,8 @@ export interface ImageResult {
   dataURL?: string;
   error?: any;
   resized?: {
-      dataURL: string;
-      type: string;
+    dataURL: string;
+    type: string;
   }
 }
 
@@ -14,6 +14,7 @@ export interface ResizeOptions {
   maxWidth?: number;
   quality?: number;
   type?: string;
+  bgColor?: string;
 }
 
 export interface Options {

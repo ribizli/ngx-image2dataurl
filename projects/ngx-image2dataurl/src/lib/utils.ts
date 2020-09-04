@@ -10,6 +10,7 @@ export function createImageFromDataUrl(dataURL: string) {
 }
 
 export async function resizeImage(dataURL: string, {
+  bgColor,
   maxHeight,
   maxWidth,
   quality = 0.7,
@@ -29,7 +30,7 @@ export async function resizeImage(dataURL: string, {
     width = maxWidth;
   }
 
-  if (height > maxHeight ) {
+  if (height > maxHeight) {
     width = Math.round(width * maxHeight / height);
     height = maxHeight;
   }
@@ -39,6 +40,12 @@ export async function resizeImage(dataURL: string, {
 
   //draw image on canvas
   const ctx = canvas.getContext("2d");
+
+  if (bgColor) {
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+
   ctx.drawImage(image, 0, 0, width, height);
 
   // get the data from canvas as 70% jpg (or specified type).
