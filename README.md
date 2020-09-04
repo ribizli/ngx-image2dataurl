@@ -93,6 +93,7 @@ export interface ResizeOptions {
   maxWidth?: number;
   quality?: number;
   type?: string;
+  bgColor?: string;
 }
 
 export interface Options {
@@ -106,12 +107,15 @@ export interface Options {
  - `resize.quality`: default: `0.7`
  - `resize.type`: default: as the original image
  - `allowedExtensions`: default: undefined
+ - `bgColor`: default: undefined
 
 Resize algorithm ensures, that the resized image can fit into the specified `resize.maxHeight x resize.maxWidth` size.
 
 Allowed extensions array (e.g. `['jpg', 'jpeg', 'png']`; case insensitive): if specified and an input file
 has different extension the `(imageSelected)` event is fired with the error field set to 'Extension Not Allowed'.
 `dataURL` and `resize` not calculated at all.
+
+`bgColor` is an optional parameter to force a certain color when 'flattening' transparent images, as the default background color is black and this may be undesirable).
 
 ## Multi-Injector `IMAGE_FILE_PROCESSOR` as `ImageFileProcessor`
 
