@@ -14,7 +14,7 @@ export interface ResizeOptions {
   maxWidth?: number;
   quality?: number;
   type?: string;
-  flattenTransparencyToWhite?: boolean;
+  bgColor?: string;
 }
 
 export interface Options {

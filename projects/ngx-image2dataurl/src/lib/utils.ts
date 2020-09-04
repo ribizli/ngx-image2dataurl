@@ -10,7 +10,7 @@ export function createImageFromDataUrl(dataURL: string) {
 }
 
 export async function resizeImage(dataURL: string, {
-  flattenTransparencyToWhite,
+  bgColor,
   maxHeight,
   maxWidth,
   quality = 0.7,
@@ -41,8 +41,8 @@ export async function resizeImage(dataURL: string, {
   //draw image on canvas
   const ctx = canvas.getContext("2d");
   
-  if(flattenTransparencyToWhite){
-    ctx.fillStyle = 'white';
+  if(bgColor){
+    ctx.fillStyle = bgColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
   
