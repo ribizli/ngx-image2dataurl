@@ -9,14 +9,10 @@ export function createImageFromDataUrl(dataURL: string) {
   });
 }
 
-export async function resizeImage(dataURL: string, {
-  bgColor,
-  maxHeight,
-  maxWidth,
-  quality = 0.7,
-  type = getImageTypeFromDataUrl(dataURL)
-}: ResizeOptions = {}) {
-
+export async function resizeImage(
+  dataURL: string,
+  { bgColor, maxHeight, maxWidth, quality = 0.7, type = getImageTypeFromDataUrl(dataURL) }: ResizeOptions = {}
+) {
   const image = await createImageFromDataUrl(dataURL);
 
   if (!document) throw new Error('Work only in browser, document not defined');
@@ -26,12 +22,12 @@ export async function resizeImage(dataURL: string, {
   let width = image.width;
 
   if (width > maxWidth) {
-    height = Math.round(height * maxWidth / width);
+    height = Math.round((height * maxWidth) / width);
     width = maxWidth;
   }
 
   if (height > maxHeight) {
-    width = Math.round(width * maxHeight / height);
+    width = Math.round((width * maxHeight) / height);
     height = maxHeight;
   }
 
@@ -39,7 +35,7 @@ export async function resizeImage(dataURL: string, {
   canvas.height = height;
 
   //draw image on canvas
-  const ctx = canvas.getContext("2d");
+  const ctx = canvas.getContext('2d');
 
   if (bgColor) {
     ctx.fillStyle = bgColor;
@@ -65,5 +61,5 @@ export function fileToDataURL(file: File): Promise<string> {
 const typeRE = /^data:([^,;]+)/;
 export function getImageTypeFromDataUrl(dataURL: string): string {
   let matches = dataURL.match(typeRE);
-  return matches && matches[1] || undefined;
+  return (matches && matches[1]) || undefined;
 }

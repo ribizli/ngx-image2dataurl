@@ -1,5 +1,5 @@
-import { createImageFromDataUrl, getImageTypeFromDataUrl, ImageFileProcessor } from "ngx-image2dataurl";
-import { Injectable } from "@angular/core";
+import { createImageFromDataUrl, getImageTypeFromDataUrl, ImageFileProcessor } from 'ngx-image2dataurl';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class RotateImageFileProcessor implements ImageFileProcessor {
@@ -8,7 +8,7 @@ export class RotateImageFileProcessor implements ImageFileProcessor {
     const image = await createImageFromDataUrl(dataURL);
     canvas.width = image.height;
     canvas.height = image.width;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     //ctx.save();
     ctx.translate(canvas.width / 2, canvas.height / 2);
     ctx.rotate(Math.PI / 2);
@@ -16,5 +16,4 @@ export class RotateImageFileProcessor implements ImageFileProcessor {
     //ctx.restore();
     return canvas.toDataURL(getImageTypeFromDataUrl(dataURL));
   }
-
 }

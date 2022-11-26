@@ -6,7 +6,7 @@ export interface ImageResult {
   resized?: {
     dataURL: string;
     type: string;
-  }
+  };
 }
 
 export interface ResizeOptions {
