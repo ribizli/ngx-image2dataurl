@@ -119,6 +119,5 @@
         }
       }
     }
-  },
-  "defaultProject": "ngx-image2dataurl"
+  }
 }
